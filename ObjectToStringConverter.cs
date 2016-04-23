@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace WordProcessor.Generators
+namespace WordProcessor
 {
 	public sealed class ObjectToStringConverter
 	{

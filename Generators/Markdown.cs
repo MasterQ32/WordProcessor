@@ -6,14 +6,10 @@ using System.Threading.Tasks;
 
 namespace WordProcessor.Generators
 {
-	public sealed class Markdown : TextDocumentGenerator
+	public sealed class Markdown : RecursiveTextDocumentGenerator
 	{
-		private readonly ObjectToStringConverter converter = new ObjectToStringConverter();
-
 		public Markdown()
 		{
-			var C = converter;
-
 			C.Register<Document>(d =>
 			{
 				return string.Join("\n\n", d.Select(ToString));
@@ -54,9 +50,9 @@ namespace WordProcessor.Generators
 			C.Register<TableRow>(r => string.Join(" | ", r.Select(c => ToString(c))) + "\n");
 			C.Register<TableCell>(c => ToStringList(c));
 
-			C.Register<List>(l => string.Join("\n", l.Items.Select((i, _) => new Markdown.ListHelper() { Index = _, Item = i, Indent = 0, Type = l.Type, }).Select(ToString)));
+			C.Register<List>(l => string.Join("\n", l.Items.Select((i, _) => new ListHelper() { Index = _, Item = i, Indent = 0, Type = l.Type, }).Select(ToString)));
 
-			C.Register<Markdown.ListHelper>(h =>
+			C.Register<ListHelper>(h =>
 			{
 				string prefix = "- ";
 				if (h.Type == ListType.Ordered)
@@ -68,7 +64,7 @@ namespace WordProcessor.Generators
 					result += "\n";
 					result += string.Join(
 						"\n",
-						h.Item.Items.Select((i, _) => new Markdown.ListHelper()
+						h.Item.Items.Select((i, _) => new ListHelper()
 						{
 							Index = _,
 							Item = i,
@@ -90,15 +86,6 @@ namespace WordProcessor.Generators
 			public ListType Type { get; set; } = ListType.Unordered;
 
 			public ListItem Item { get; set; } = null;
-		}
-
-		private string ToStringList(System.Collections.IEnumerable list) => string.Join("", list.Cast<object>().Select(ToString));
-
-		private string ToString(object obj) => converter.ToString(obj);
-
-		protected override void Generate()
-		{
-			Writer.Write(converter.ToString(Document));
 		}
 	}
 }
