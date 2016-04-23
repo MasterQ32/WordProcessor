@@ -29,6 +29,10 @@ namespace WordProcessor
 			{
 				DocumentGenerator.Generate<Generators.Markdown>(fs, doc);
 			}
+			using (var fs = File.Open("result.tex", FileMode.Create, FileAccess.Write))
+			{
+				DocumentGenerator.Generate<Generators.Latex>(fs, new UTF8Encoding(false), doc);
+			}
 		}
 	}
 }

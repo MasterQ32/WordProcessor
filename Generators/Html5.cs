@@ -183,6 +183,12 @@ namespace WordProcessor.Generators
 			WriteText<Link>(element, WriteLink);
 			WriteText<InlineCode>(element, WriteInlineCode);
 			WriteText<TableCell>(element, (c) => WriteTextElements(c));
+			WriteText<Formula>(element, WriteFormula);
+		}
+
+		private void WriteFormula(Formula obj)
+		{
+			Writer.Write("<formula>{0}</formula>", obj.Code);
 		}
 
 		private void WriteInlineCode(InlineCode obj)

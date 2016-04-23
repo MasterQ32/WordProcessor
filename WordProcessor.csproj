@@ -52,6 +52,7 @@
     <Compile Include="DocumentGenerator.cs" />
     <Compile Include="ElementWrapper.cs" />
     <Compile Include="FloatPanel.cs" />
+    <Compile Include="Generators\Latex.cs" />
     <Compile Include="Generators\Markdown.cs" />
     <Compile Include="ObjectToStringConverter.cs" />
     <Compile Include="Heading.cs" />
@@ -60,6 +61,7 @@
     <Compile Include="Italic.cs" />
     <Compile Include="Link.cs" />
     <Compile Include="List.cs" />
+    <Compile Include="Formula.cs" />
     <Compile Include="Parsers\Markdown.cs" />
     <Compile Include="Paragraph.cs" />
     <Compile Include="Parser.cs" />

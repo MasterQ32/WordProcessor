@@ -286,6 +286,10 @@ namespace WordProcessor.Parsers
 			@"`(.*?)`",
 			RegexOptions.Compiled);
 
+		private static readonly Regex formulaMatcher = new Regex(
+			@"\$\$(.*?)\$\$",
+			RegexOptions.Compiled);
+
 		private static readonly Regex urlMatcher = new Regex(
 			@"\[(.*?)\]\((.*?)\)",
 			RegexOptions.Compiled);
@@ -313,6 +317,11 @@ namespace WordProcessor.Parsers
 				{
 					Pattern = inlineCodeMatcher,
 					Evaluator = (match) => new InlineCode(match.Groups[1].Value)
+				},
+				new CreateTextOption()
+				{
+					Pattern = formulaMatcher,
+					Evaluator = (match) => new Formula(match.Groups[1].Value),
 				},
 				new CreateTextOption()
 				{

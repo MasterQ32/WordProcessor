@@ -37,6 +37,8 @@ namespace WordProcessor.Generators
 
 			C.Register<InlineCode>(c => "`" + c.Code + "`");
 
+			C.Register<Formula>(c => "$$" + c.Code + "$$");
+
 			C.Register<Link>(l => "[" + ToStringList(l) + "](" + l.Target + ")");
 
 			C.Register<Picture>(p => "![" + p.Description + "](" + p.Location + ")");

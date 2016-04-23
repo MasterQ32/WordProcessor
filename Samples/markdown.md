@@ -36,7 +36,7 @@ entsteht ein Abstand zum ersten Absatz.
 
 ![Profilbild](file://C:/dump/7d57a81fa8a45ac3e545ff9b26237255fb7d33fd.jpeg)
 
-$$ f(x) = a * x^2 + b*x * c $$ 
+$$ f(x) = a * x^2 + b*x + c $$ 
 
 :grin:
 
