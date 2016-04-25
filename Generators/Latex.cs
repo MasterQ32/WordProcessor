@@ -17,6 +17,7 @@ namespace WordProcessor.Generators
 \usepackage[utf8]{inputenc}
 \usepackage[ngerman]{babel}
 % \usepackage{listings}
+\usepackage{hyperref}
 \usepackage{graphicx}
 
 \begin{document}
@@ -45,7 +46,7 @@ namespace WordProcessor.Generators
 
 			C.Register<InlineCode>(f => @"\texttt{" + f.Code + "}");
 
-			C.Register<Link>(l => ToStringList(l));
+			C.Register<Link>(l => @"\href{" + l.Target + "}{" + ToStringList(l) + "}");
 
 			C.Register<Bold>(b => @"\textbf{" + ToStringList(b) + "}");
 
